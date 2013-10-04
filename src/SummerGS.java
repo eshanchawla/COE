@@ -51,6 +51,9 @@ public class SummerGS {
 		Font f2 = new Font(Font.FontFamily.TIMES_ROMAN, 9, Font.BOLD);
 		PdfPCell summer = new PdfPCell(new Phrase("Summer "
 				+ String.valueOf(year++), f2));
+		summer.setBorderWidthLeft(0F);
+		summer.setBorderWidthRight(0F);
+		summer.setBorderWidthBottom(0F);
 		Font f1 = new Font(Font.FontFamily.TIMES_ROMAN, 6.5f);
 		PdfPCell blanks = new PdfPCell(new Phrase(" ", f1));
 		PdfPTable table = new PdfPTable(5);
@@ -62,9 +65,21 @@ public class SummerGS {
 		}
 		PdfPCell sno = new PdfPCell(new Phrase("S.No.", f1));
 		PdfPCell course = new PdfPCell(new Phrase("COURSE", f1));
+		course.setBorderWidthLeft(0F);
+		course.setBorderWidthRight(0F);
+		course.setBorderWidthBottom(0F);
 		PdfPCell code = new PdfPCell(new Phrase("Code", f1));
+		code.setBorderWidthTop(0F);
+		code.setBorderWidthRight(0F);
+		code.setBorderWidthBottom(0F);
 		PdfPCell credits = new PdfPCell(new Phrase("Credits", f1));
+		//credits.setBorderWidthRight(0F);
+		credits.setBorderWidthBottom(0F);
+		credits.setBorderWidthTop(0F);
 		PdfPCell grade1 = new PdfPCell(new Phrase("Grade", f1));
+grade1.setBorderWidthTop(0F);
+grade1.setBorderWidthBottom(0F);
+grade1.setBorderWidthLeft(0F);
 		sno.setHorizontalAlignment(Element.ALIGN_CENTER);
 		course.setHorizontalAlignment(Element.ALIGN_CENTER);
 		code.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -74,8 +89,13 @@ public class SummerGS {
 
 		table.addCell(blanks);
 		table.addCell(summer);
+		blanks.setBorderWidthLeft(0.1F);
+		blanks.setBorderWidthRight(0.1F);
 		table.addCell(blanks);
+		blanks.setBorderWidthLeft(0.1F);
+		blanks.setBorderWidthRight(0F);
 		table.addCell(blanks);
+		blanks.setBorderWidthRight(0.2F);
 		table.addCell(blanks);
 		table.addCell(sno);
 		table.addCell(course);
@@ -83,11 +103,33 @@ public class SummerGS {
 		table.addCell(credits);
 		table.addCell(grade1);
 		for (int i = 1; i <= 15; i++) {
-			table.addCell(new PdfPCell(new Phrase(String.valueOf(i), f1)));
-			table.addCell(new PdfPCell(new Phrase(courseName.get(i - 1), f1)));
-			table.addCell(new PdfPCell(new Phrase(courseCode.get(i - 1), f1)));
-			table.addCell(new PdfPCell(new Phrase(courseCredits.get(i - 1), f1)));
-			table.addCell(new PdfPCell(new Phrase(grade.get(i - 1), f1)));
+		PdfPCell cell1=new PdfPCell(new Phrase(String.valueOf(i), f1));
+		cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+			table.addCell(cell1);
+		PdfPCell cell2=new PdfPCell(new Phrase(courseName.get(i - 1), f1));
+		//cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+			 cell2.setPaddingLeft(10F);	
+			 cell2.setBorderWidthLeft(0F);
+			 cell2.setBorderWidthRight(0F);
+			 cell2.setBorderWidthBottom(0);
+		PdfPCell cell3=new PdfPCell(new Phrase(courseCode.get(i - 1), f1));
+		cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+		
+		PdfPCell cell4=new PdfPCell(new Phrase(courseCredits.get(i - 1), f1));
+		cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell4.setBorderWidthRight(0F);
+		cell4.setBorderWidthLeft(0F);
+		cell4.setBorderWidthBottom(0F);
+		PdfPCell cell5=new PdfPCell(new Phrase(grade.get(i - 1), f1));
+		cell5.setHorizontalAlignment(Element.ALIGN_CENTER);
+		if(i==15)
+		{ cell2.setBorderWidthBottom(0.2F);cell4.setBorderWidthBottom(0.2F);}
+		
+		table.addCell(cell2);
+		
+		table.addCell(cell3);
+			table.addCell(cell4);
+			table.addCell(cell5);
 		}
 		return table;
 	}
@@ -271,7 +313,6 @@ public class SummerGS {
 			grade_point.setWidths(new float[] { 3f, 1f, 1f });
 			grade_point.setWidthPercentage(90);
 			grade_point.setSpacingBefore(8f);
-
 			grade_point.addCell(new PdfPCell(new Paragraph(
 					"Academic Performance", f3)));
 			grade_point.addCell(new PdfPCell(new Paragraph("Grade", f3)));
